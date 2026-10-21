@@ -3,6 +3,9 @@
 % Blank starting document for the reusable PCL Beamer theme.
 \documentclass[aspectratio=169,11pt]{beamer}
 \usetheme{PCL}
+% Optional layout settings (lengths refer to the 160 x 90 mm canvas):
+% \PCLSetup{title left=20.8mm,title color=PCLTitleRed}
+% \usepackage{pclplots} % Load only when using the plot styles in demo.tex.
 
 \title{报告标题}
 \subtitle{}
@@ -13,12 +16,13 @@
 \begin{document}
 \PCLTitleFrame
 
-% Uncomment after adding sections; compile twice to populate the contents.
+% Uncomment after adding sections; build.ps1 reruns until references settle.
 % \PCLContentsFrame
 % \PCLSectionFramesOn
 
-% \section{章节名称}
+% \PCLSection[目录短名称]{章节完整名称}
 % \begin{frame}{页面标题}
+%   \framesubtitle{可选的实验条件或补充说明}
 %   正文内容
 % \end{frame}
 

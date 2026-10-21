@@ -3,8 +3,9 @@
 % Layout specimens only. All text is generic and contains no research claims.
 \documentclass[aspectratio=169,11pt]{beamer}
 \usetheme{PCL}
-\title{中文学术报告模板\\副标题可放在第二行}
-\subtitle{版式预览}
+\usepackage{pclplots} % Optional: omit when no pgfplots figures are used.
+\title{中文学术报告模板}
+\subtitle{通用版式与科研图表}
 \author{汇报人姓名}
 \institute{鹏城实验室}
 \date{\PCLCurrentYearMonth}
@@ -16,9 +17,9 @@
 \section{单图与双栏版式}
 \begin{frame}{单张大图与结论}
   \PCLLead[说明]{上方概括问题，主体区域放置一张清晰的大图。}
-  \PCLPlaceholder[40mm]{主图占位\\[2mm]\small 可放入 PDF 矢量图、曲线或系统照片}
+  \PCLPlaceholder[38mm]{主图占位\\[2mm]\small 可放入 PDF 矢量图、曲线或系统照片}
   \PCLSource{图注或来源放在此处。此页仅展示版式。}
-  \PCLTakeaway{一句话概括本页结论，重点信息可以使用黄色强调。}
+  \PCLTakeaway{一句话概括本页结论，字号保持与正文一致。}
 \end{frame}
 
 \begin{frame}{图文双栏}
@@ -122,6 +123,103 @@
     \end{tabular}
   \end{center}
   \PCLSource{注：此处均为模板占位文字，没有实验数值。}
+\end{frame}
+\section{科研图表版式}
+\begin{frame}{单图结果页}
+  \framesubtitle{演示曲线，非实测结果；横纵轴、单位与图例应完整标注}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[pcl axis,width=130mm,height=48mm,
+      xlabel={信噪比 / dB},ylabel={归一化误差},
+      xmin=0,xmax=20,ymin=0,ymax=1,
+      xtick={0,5,10,15,20},ytick={0,0.2,0.4,0.6,0.8,1}]
+      \addplot[pcl method] coordinates {(0,.8)(5,.53)(10,.29)(15,.15)(20,.08)};
+      \addlegendentry{方法 A}
+      \addplot[pcl baseline] coordinates {(0,.95)(5,.72)(10,.48)(15,.30)(20,.20)};
+      \addlegendentry{基线 B}
+      \addplot[pcl reference] coordinates {(0,.72)(5,.44)(10,.22)(15,.10)(20,.05)};
+      \addlegendentry{参考 C}
+    \end{axis}
+  \end{tikzpicture}\par
+  \PCLFigureCaption{把面积留给曲线；用颜色、线型和标记共同区分方法。}
+\end{frame}
+
+\begin{frame}{双图对比页}
+  \framesubtitle{两图共享横轴范围与方法样式；以下数值仅用于展示排版}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.485\textwidth}
+      \PCLHeading{（a）归一化误差}
+      \begin{tikzpicture}
+        \begin{axis}[pcl axis,width=0.97\linewidth,height=42mm,
+          xlabel={信噪比 / dB},ylabel={归一化误差},
+          xmin=0,xmax=20,ymin=0,ymax=1,
+          xtick={0,10,20},ytick={0,.5,1}]
+          \addplot[pcl method] coordinates {(0,.8)(5,.53)(10,.29)(15,.15)(20,.08)};
+          \addlegendentry{方法 A}
+          \addplot[pcl baseline] coordinates {(0,.95)(5,.72)(10,.48)(15,.30)(20,.20)};
+          \addlegendentry{基线 B}
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.485\textwidth}
+      \PCLHeading{（b）归一化吞吐量}
+      \begin{tikzpicture}
+        \begin{axis}[pcl axis,width=0.97\linewidth,height=42mm,
+          xlabel={信噪比 / dB},ylabel={归一化吞吐量},
+          xmin=0,xmax=20,ymin=0,ymax=1,
+          xtick={0,10,20},ytick={0,.5,1},legend pos=south east]
+          \addplot[pcl method] coordinates {(0,.12)(5,.35)(10,.60)(15,.80)(20,.91)};
+          \addlegendentry{方法 A}
+          \addplot[pcl baseline] coordinates {(0,.08)(5,.24)(10,.43)(15,.65)(20,.80)};
+          \addlegendentry{基线 B}
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+  \vfill
+  \PCLTakeaway{对比时保持测试条件一致，并在图注中说明变化的变量。}
+\end{frame}
+
+\begin{frame}{系统框图页}
+  \framesubtitle{通用处理链路示例，所有模块与箭头均可直接编辑}
+  \vspace{5mm}
+  \centering
+  \begin{tikzpicture}[
+      module/.style={draw=PCLLine,fill=PCLLight,rounded corners=1mm,
+        minimum width=30mm,minimum height=12mm,align=center,font=\normalsize},
+      flow/.style={-{Latex[length=2mm]},PCLBlue,line width=0.8pt},
+      note/.style={font=\small,text=PCLGray,align=center}]
+    \node[module] (tx) at (0,0) {信号生成};
+    \node[module] (channel) at (3.8,0) {传输与采集};
+    \node[module] (rx) at (7.6,0) {同步与处理};
+    \node[module] (metric) at (11.4,0) {性能评估};
+    \draw[flow] (tx) -- (channel);
+    \draw[flow] (channel) -- (rx);
+    \draw[flow] (rx) -- (metric);
+    \node[note,below=4mm of tx] {波形与参数};
+    \node[note,below=4mm of channel] {设备与环境};
+    \node[note,below=4mm of rx] {算法与配置};
+    \node[note,below=4mm of metric] {指标与统计};
+  \end{tikzpicture}\par
+  \vfill
+  \PCLLead[说明]{主链路保持清晰；模块下方只放与该模块直接相关的说明。}
+\end{frame}
+
+\begin{frame}{照片与说明页}
+  \framesubtitle{示例照片为实验室楼宇；正式报告可替换为实验平台照片}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.64\textwidth}
+      \PCLImage{46mm}{assets/building.jpg}
+      \PCLFigureCaption{图：实验室楼宇照片，仅展示照片与图注的排版。}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \PCLHeading{对象与条件}
+      用简短文字说明照片中的对象及拍摄或测试条件。
+      \par\vspace{4mm}
+      \PCLHeading{需要关注的位置}
+      必要时用编号标注设备，在这里按编号说明。
+    \end{column}
+  \end{columns}
 \end{frame}
 \PCLClosingFrame
 \end{document}
