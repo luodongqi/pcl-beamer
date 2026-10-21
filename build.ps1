@@ -5,7 +5,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Push-Location -LiteralPath $PSScriptRoot
 try {
-    $buildDir = Join-Path (Split-Path -Parent $PSScriptRoot) 'tmp\pcl_beamer-build'
+    $buildDir = Join-Path $PSScriptRoot 'build'
     New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
     & latexmk '-xelatex' '-interaction=nonstopmode' '-halt-on-error' '-file-line-error' "-outdir=$buildDir" "$Target.tex"
     if ($LASTEXITCODE -ne 0) { throw "Compilation failed. See $buildDir/$Target.log." }

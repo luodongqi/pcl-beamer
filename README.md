@@ -24,7 +24,7 @@
 
 脚本使用 `latexmk` 驱动 XeLaTeX，按需要重复编译直到目录、页码与交叉引用稳定，成功后更新模板文件夹中的 PDF。需要 TeX Live 及 Beamer、ctex、TikZ、tcolorbox；图表示例还需要 pgfplots。已在本机 TeX Live 2025 验证。
 
-所有辅助文件放在上一级目录的 `tmp/pcl_beamer-build/` 中。也可以执行 `latexmk -xelatex main.tex`，此时 PDF 保留在该临时构建目录。不要用没有输出目录参数的裸编译命令，以免在模板目录留下辅助文件。
+所有辅助文件放在仓库内的 `build/` 中，该目录不纳入 Git。也可以执行 `latexmk -xelatex main.tex`，此时 PDF 保留在 `build/` 目录。不要用没有输出目录参数的裸编译命令，以免在模板目录留下辅助文件。
 
 中文优先使用微软雅黑，缺失时回退到 Fandol 黑体；西文优先使用 Arial，缺失时回退到 TeX Gyre Heros。PDF 嵌入所用字体，不需要接收方安装字体。
 
@@ -146,3 +146,11 @@
 所有页面只引用 `assets/logo-cover.jpg`。其他旧 Logo 文件是保留的源素材，不参与渲染。封面蓝色渐变、目录楼宇照片、正文左上装饰和结束页地图背景均沿用现有视觉语言。
 
 正式交付前编译 PDF，检查全部页面、实际曲线的文字、长图注和交叉引用；成功编译本身不保证没有视觉问题。普通正文内容过多仍可能产生 `Overfull` 警告，应精简或拆页。固定高度卡片应按实际内容检查。
+
+## 仓库布局与版本管理
+
+主题文件和 `main.tex`、`demo.tex` 保留在根目录，便于直接使用 `\usetheme{PCL}` 和 `\usepackage{pclplots}`；共用素材放在 `assets/`，所有构建中间文件放在 `build/`。
+
+Git 只跟踪源文件、素材和配置。根目录的 `main.pdf`、`demo.pdf` 是本地编译结果，克隆或检出历史版本后请重新编译；作为源素材使用的其他 PDF 不会被统一忽略。
+
+模板历史保留初版、v2.0 布局升级及后续功能改进。查看早期版本差异时，可使用 `git diff --ignore-cr-at-eol <旧提交> <新提交>` 忽略换行格式差异。
