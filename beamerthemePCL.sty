@@ -1,0 +1,245 @@
+% !TeX encoding = UTF-8
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemePCL}[2026/10/20 PCL presentation theme]
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \PackageError{beamerthemePCL}{Compile with XeLaTeX}{This theme uses Chinese system fonts.}
+\fi
+\RequirePackage[fontset=none,scheme=plain]{ctex}
+\RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}
+\usetikzlibrary{calc,arrows.meta,positioning}
+
+% The source is 13 1/3 x 7 1/2 inches. Beamer uses a 160 x 90 mm canvas.
+\geometry{paperwidth=160mm,paperheight=90mm}
+\IfFontExistsTF{Microsoft YaHei}{%
+  \setCJKmainfont{Microsoft YaHei}[BoldFont=Microsoft YaHei Bold]
+  \setCJKsansfont{Microsoft YaHei}[BoldFont=Microsoft YaHei Bold]
+}{%
+  \setCJKmainfont{FandolHei-Regular}[BoldFont=FandolHei-Bold]
+  \setCJKsansfont{FandolHei-Regular}[BoldFont=FandolHei-Bold]
+}
+\IfFontExistsTF{Arial}{\setsansfont{Arial}}{\setsansfont{TeX Gyre Heros}}
+\setmonofont{Latin Modern Mono}[Scale=MatchLowercase]
+\usefonttheme{professionalfonts}
+
+\definecolor{PCLBlue}{HTML}{005B9C}
+\definecolor{PCLAccent}{HTML}{0067B3}
+\definecolor{PCLDeepBlue}{HTML}{00233D}
+\definecolor{PCLRed}{HTML}{C00000}
+\definecolor{PCLTitleRed}{HTML}{8E0000}
+\definecolor{PCLLight}{HTML}{EDF7FC}
+\definecolor{PCLLine}{HTML}{BCDCEB}
+\definecolor{PCLGray}{HTML}{60666C}
+\definecolor{PCLInk}{HTML}{242424}
+
+\setbeamercolor{normal text}{fg=PCLInk,bg=white}
+\setbeamercolor{structure}{fg=PCLBlue}
+\setbeamercolor{alerted text}{fg=PCLRed}
+\setbeamercolor{frametitle}{fg=PCLTitleRed,bg=white}
+\setbeamercolor{title}{fg=PCLBlue}
+\setbeamercolor{section in toc}{fg=PCLRed}
+\setbeamercolor{section in toc shaded}{fg=PCLBlue}
+\setbeamercolor{block title}{fg=white,bg=PCLBlue}
+\setbeamercolor{block body}{fg=PCLInk,bg=PCLLight}
+\setbeamercolor{block title alerted}{fg=white,bg=PCLTitleRed}
+\setbeamercolor{block body alerted}{fg=PCLInk,bg=PCLRed!4}
+\setbeamerfont{normal text}{size=\fontsize{11}{15}\selectfont}
+\setbeamerfont{frametitle}{size=\fontsize{16}{19}\selectfont,series=\bfseries}
+\setbeamerfont{title}{size=\fontsize{17}{23}\selectfont,series=\bfseries}
+\setbeamerfont{section in toc}{size=\fontsize{14}{21}\selectfont,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block body}{size=\normalsize}
+\setbeamersize{text margin left=5.5mm,text margin right=5.5mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{items}[square]
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamercolor{caption name}{fg=PCLBlue}
+\AtBeginDocument{\usebeamerfont{normal text}}
+\addtobeamertemplate{itemize/enumerate body begin}{\setlength{\itemsep}{1.5mm}}{}
+
+\newcommand{\PCLAssetPath}{assets/}
+\newcommand{\PCLSetAssetPath}[1]{\renewcommand{\PCLAssetPath}{#1}}
+\newcommand{\PCLSource}[1]{\par\vspace{1mm}{\fontsize{7}{9}\selectfont\color{PCLGray}#1\par}}
+\newcommand{\PCLTitleColor}[1]{\setbeamercolor{frametitle}{fg=#1}}
+\newcommand{\PCLPageNumber}{\insertframenumber}
+\newcommand{\PCLCurrentYearMonth}{\number\year 年\number\month 月}
+\date{\PCLCurrentYearMonth}
+
+% Absolute decorations are expressed on the 160 x 90 mm reference canvas.
+\newenvironment{pclcanvas}{%
+  \begin{tikzpicture}[remember picture,overlay,x=1mm,y=-1mm]
+  \begin{scope}[shift={(current page.north west)}]
+}{\end{scope}\end{tikzpicture}}
+\newcommand{\pcl@ornament}{%
+  \fill[PCLAccent] (4.8,7.42) rectangle (6.8,9.42);
+  \fill[PCLAccent] (7.35,7.42) rectangle (9.35,9.42);
+  \shade[left color=PCLAccent,right color=white] (9.95,7.42) rectangle (16.5,9.42);
+}
+\newcommand{\pcl@bodybackground}{%
+  \begin{pclcanvas}
+    \pcl@ornament
+    \node[anchor=north west,inner sep=0] at (145.65,3.05)
+      {\includegraphics[width=10.4mm]{\PCLAssetPath logo-cover.jpg}};
+  \end{pclcanvas}
+}
+\setbeamertemplate{background}{\pcl@bodybackground}
+\setbeamertemplate{frametitle}{%
+  \vspace*{2.2mm}
+  \hspace*{15.3mm}% left text margin + offset = 20.8 mm
+  \begin{minipage}[c][9mm][c]{121mm}
+    \raggedright\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle
+  \end{minipage}\par\vspace*{2mm}
+}
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{\hfill{\fontsize{7}{9}\selectfont\color{PCLGray}\PCLPageNumber}\hspace*{4mm}}
+  \vspace*{2mm}
+}
+
+\newcommand{\pcl@coverbackground}{%
+  \begin{pclcanvas}
+    \shade[top color=PCLDeepBlue,bottom color=PCLAccent]
+      (0,0) rectangle (160,34.43);
+    \fill[white] (80,34.93) circle (14.45);
+    \begin{scope}
+      \clip (80,34.93) circle (13.85);
+      \node[inner sep=0] at (80,34.93)
+        {\includegraphics[width=27.7mm]{\PCLAssetPath logo-cover.jpg}};
+    \end{scope}
+  \end{pclcanvas}
+}
+\newcommand{\PCLTitleFrame}{%
+  \begingroup
+  \setbeamertemplate{background}{\pcl@coverbackground}
+  \begin{frame}[plain]
+    \begin{pclcanvas}
+      \node[align=center,text width=140mm,inner sep=0,text=PCLBlue]
+        at (80,57.1) {\usebeamerfont{title}\inserttitle};
+      \node[align=center,text width=140mm,inner sep=0,font=\fontsize{10}{13}\selectfont,text=PCLGray]
+        at (80,66.7) {\insertsubtitle};
+      \node[align=center,inner sep=0,font=\fontsize{11}{14}\selectfont]
+        at (80,73) {\textbf{汇报人：}\insertauthor};
+      \node[align=center,inner sep=0,font=\fontsize{11}{14}\selectfont,text=PCLGray]
+        at (80,79.2) {\insertinstitute};
+      \node[align=center,inner sep=0,font=\fontsize{11}{14}\selectfont\bfseries]
+        at (80,85.2) {\insertdate};
+    \end{pclcanvas}
+  \end{frame}
+  \endgroup
+}
+
+\newcommand{\pcl@contentsbackground}{%
+  \begin{pclcanvas}
+    % The photo and geometric rhythm follow the original contents layout.
+    \fill[PCLLight] (14.5,10.5) -- (60.2,10.5) -- (35,51) -- cycle;
+    \shade[left color=PCLBlue,right color=PCLAccent!55]
+      (20.3,0) -- (63.7,0) -- (53.5,15.9) -- cycle;
+    \node[font=\fontsize{14}{17}\selectfont\bfseries,text=PCLInk,anchor=west,inner sep=0]
+      at (20.3,7.8) {CONTENTS};
+    \begin{scope}
+      \clip (7.03,15.9) -- (39.94,47.82) -- (7.03,79.75) -- (-25.88,47.82) -- cycle;
+      \node[inner sep=0] at (7.03,47.82)
+        {\includegraphics[height=63.85mm]{\PCLAssetPath building.jpg}};
+    \end{scope}
+    \shade[left color=PCLBlue!15,right color=PCLBlue!45]
+      (129.35,90) -- (160,58.3) -- (160,90) -- cycle;
+    \node[anchor=north west,inner sep=0] at (146.1,3.43)
+      {\includegraphics[width=9.5mm]{\PCLAssetPath logo-cover.jpg}};
+    \node[anchor=south east,font=\fontsize{7}{9}\selectfont,text=PCLGray,inner sep=0]
+      at (156,87) {\PCLPageNumber};
+  \end{pclcanvas}
+}
+\setbeamertemplate{section in toc}{%
+  \leavevmode\usebeamerfont{section in toc}\usebeamercolor[fg]{section in toc}%
+  \zhnumber{\inserttocsectionnumber}、\inserttocsection\par\vspace{2.5mm}
+}
+\setbeamertemplate{section in toc shaded}{%
+  \leavevmode\usebeamerfont{section in toc}\color{PCLBlue}%
+  \zhnumber{\inserttocsectionnumber}、\inserttocsection\par\vspace{2.5mm}
+}
+\newcommand{\PCLContentsFrame}{%
+  \begingroup
+  \setbeamertemplate{background}{\pcl@contentsbackground}
+  \ifnum\value{section}>0
+    \setbeamercolor{section in toc}{fg=PCLRed}
+  \else
+    \setbeamercolor{section in toc}{fg=PCLBlue}
+  \fi
+  \begin{frame}[plain]
+    \begin{pclcanvas}
+      \node[anchor=west,inner sep=0,text width=100mm] at (50,48)
+        {\begin{minipage}{100mm}%
+          \ifnum\value{section}>0
+            \tableofcontents[currentsection,hideallsubsections]%
+          \else
+            \tableofcontents[hideallsubsections]%
+          \fi
+        \end{minipage}};
+    \end{pclcanvas}
+  \end{frame}\endgroup
+}
+\newcommand{\PCLSectionFrame}{%
+  \begingroup
+  \setbeamertemplate{background}{\pcl@contentsbackground}
+  \setbeamercolor{section in toc}{fg=PCLRed}
+  \begin{frame}[plain]
+    \begin{pclcanvas}
+      \node[anchor=west,inner sep=0,text width=100mm] at (50,48)
+        {\begin{minipage}{100mm}\tableofcontents[currentsection,hideallsubsections]\end{minipage}};
+    \end{pclcanvas}
+  \end{frame}\endgroup
+}
+\newcommand{\PCLSectionFramesOn}{\AtBeginSection[]{\PCLSectionFrame}}
+\newcommand{\PCLSectionFramesOff}{\AtBeginSection[]{}}
+
+% Reusable content components. Ordinary beamer frames/columns remain supported.
+\newtcolorbox{PCLPanel}[2][]{%
+  enhanced,colback=white,colframe=PCLLine,colbacktitle=PCLBlue,
+  coltitle=white,fonttitle=\bfseries,title={#2},boxrule=0.4pt,
+  arc=1mm,left=2.2mm,right=2.2mm,top=2mm,bottom=2mm,
+  before skip=1mm,after skip=1mm,#1}
+\newcommand{\PCLLead}[2][要点]{%
+  \begin{tcolorbox}[enhanced,colback=PCLLight,colframe=PCLLine,boxrule=0.35pt,
+    arc=0.8mm,left=2mm,right=2mm,top=1.4mm,bottom=1.4mm,before skip=0mm,after skip=2mm]
+    {\color{PCLBlue}\bfseries #1}\quad #2
+  \end{tcolorbox}}
+\newcommand{\PCLTakeaway}[1]{%
+  \begin{tcolorbox}[colback=PCLBlue,colframe=PCLBlue,coltext=white,
+    boxrule=0pt,arc=0.7mm,left=2mm,right=2mm,top=1.3mm,bottom=1.3mm,
+    before skip=2mm,after skip=0mm,fontupper=\bfseries\small]
+    #1
+  \end{tcolorbox}}
+\newcommand{\PCLPlaceholder}[2][36mm]{%
+  \begin{tcolorbox}[height=#1,valign=center,halign=center,colback=PCLLight!50,
+    colframe=PCLLine,boxrule=0.5pt,arc=1mm,coltext=PCLGray,
+    before skip=0mm,after skip=0mm]
+    #2
+  \end{tcolorbox}}
+\newcommand{\PCLImage}[3][\linewidth]{%
+  \begin{center}\includegraphics[width=#1,height=#2,keepaspectratio]{#3}\end{center}}
+
+\newcommand{\PCLClosingFrame}[1][谢谢！请批评指正！]{%
+  \begingroup
+  \setbeamertemplate{background}{%
+    \begin{pclcanvas}
+      \node[anchor=north west,inner sep=0] at (0,0)
+        {\includegraphics[width=160mm,height=90mm]{\PCLAssetPath closing-background.jpg}};
+      \begin{scope}
+        \clip (135.89,20.57) circle (9.59);
+        \node[anchor=north west,inner sep=0] at (126.3,10.98)
+          {\includegraphics[width=19.18mm]{\PCLAssetPath logo-cover.jpg}};
+      \end{scope}
+    \end{pclcanvas}}
+  \begin{frame}[plain]
+    \begin{pclcanvas}
+      \node[anchor=west,inner sep=0,text width=145mm,font=\fontsize{21}{28}\selectfont\bfseries]
+        at (5.5,63) {#1};
+    \end{pclcanvas}
+  \end{frame}\endgroup
+}
+\mode<all>

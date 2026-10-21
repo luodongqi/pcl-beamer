@@ -1,0 +1,127 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% Layout specimens only. All text is generic and contains no research claims.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{PCL}
+\title{中文学术报告模板\\副标题可放在第二行}
+\subtitle{版式预览}
+\author{汇报人姓名}
+\institute{鹏城实验室}
+\date{\PCLCurrentYearMonth}
+
+\begin{document}
+\PCLTitleFrame
+\PCLContentsFrame
+
+\section{单图与双栏版式}
+\begin{frame}{单张大图与结论}
+  \PCLLead[说明]{上方概括问题，主体区域放置一张清晰的大图。}
+  \PCLPlaceholder[40mm]{主图占位\\[2mm]\small 可放入 PDF 矢量图、曲线或系统照片}
+  \PCLSource{图注或来源放在此处。此页仅展示版式。}
+  \PCLTakeaway{一句话概括本页结论，重点信息可以使用黄色强调。}
+\end{frame}
+
+\begin{frame}{图文双栏}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \begin{PCLPanel}{文字说明}
+        \begin{itemize}
+          \item 第一项核心内容
+          \item 第二项方法说明
+          \item 第三项结果解释
+        \end{itemize}
+      \end{PCLPanel}
+      \PCLSource{说明文字与右侧图形保持对应。}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \PCLPlaceholder[47mm]{图形区域\\[2mm]\small 根据内容调整两栏比例}
+    \end{column}
+  \end{columns}
+  \vfill
+  \PCLTakeaway{左侧说明方法，右侧呈现图形或实验结果。}
+\end{frame}
+
+\section{对比与公式版式}
+\PCLSectionFrame
+\begin{frame}{两组结果对比}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.485\textwidth}
+      \begin{PCLPanel}{条件 A}
+        \PCLPlaceholder[32mm]{左图占位}
+        \small 图注：简要说明左图。
+      \end{PCLPanel}
+    \end{column}
+    \begin{column}{0.485\textwidth}
+      \begin{PCLPanel}{条件 B}
+        \PCLPlaceholder[32mm]{右图占位}
+        \small 图注：简要说明右图。
+      \end{PCLPanel}
+    \end{column}
+  \end{columns}
+  \vfill
+  \PCLTakeaway{两图使用一致的尺寸、坐标范围和图例规范。}
+\end{frame}
+
+\begin{frame}{公式与图形}
+  \PCLLead[模型]{保留关键表达式，并用文字解释符号和条件。}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \begin{PCLPanel}{数学排版示例}
+        \[\mathbf{y}=\mathbf{A}\mathbf{x}+\mathbf{n}\]
+        \small
+        \(\mathbf{x}\)：待估计向量。\par\medskip
+        \(\mathbf{A}\)：观测矩阵。\par\medskip
+        \(\mathbf{n}\)：噪声向量。
+      \end{PCLPanel}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \PCLPlaceholder[39mm]{示意图或结果曲线}
+    \end{column}
+  \end{columns}
+  \PCLSource{公式仅用于演示数学排版。}
+\end{frame}
+
+\section{总结与表格版式}
+\begin{frame}{三项并列总结}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.315\textwidth}
+      \begin{PCLPanel}[height=43mm]{第一项}
+        \textbf{核心观点}\par\medskip
+        用两到三行文字说明这一项内容及其意义。
+      \end{PCLPanel}
+    \end{column}
+    \begin{column}{0.315\textwidth}
+      \begin{PCLPanel}[height=43mm]{第二项}
+        \textbf{核心观点}\par\medskip
+        可以替换为一个简洁的示意图或关键数值。
+      \end{PCLPanel}
+    \end{column}
+    \begin{column}{0.315\textwidth}
+      \begin{PCLPanel}[height=43mm]{第三项}
+        \textbf{核心观点}\par\medskip
+        三列的文字层级与视觉重量保持一致。
+      \end{PCLPanel}
+    \end{column}
+  \end{columns}
+  \vfill
+  \PCLTakeaway{用一句话归纳三项内容之间的联系。}
+\end{frame}
+
+\begin{frame}{参数与比较表}
+  \PCLLead[参数]{单位、实验条件及统计口径应当标注清楚。}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{p{36mm}p{43mm}p{43mm}}
+      \toprule
+      \textbf{项目} & \textbf{配置 A} & \textbf{配置 B} \\
+      \midrule
+      参数名称一 & 待填写 & 待填写 \\
+      参数名称二 & 待填写 & 待填写 \\
+      评价指标 & 待填写 & 待填写 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \PCLSource{注：此处均为模板占位文字，没有实验数值。}
+\end{frame}
+\PCLClosingFrame
+\end{document}

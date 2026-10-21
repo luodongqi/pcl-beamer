@@ -1,0 +1,26 @@
+# Local build output
+/build/
+/main.pdf
+/demo.pdf
+
+# LaTeX auxiliary files (keep PDF source assets trackable)
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.dvi
+*.bcf
+*.run.xml
+*.blg
+
+# OS metadata
+.DS_Store
+Thumbs.db
