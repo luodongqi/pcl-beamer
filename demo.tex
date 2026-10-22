@@ -16,22 +16,22 @@
 
 \section{单图与双栏版式}
 \begin{frame}{单张大图与结论}
-  \PCLLead[说明]{上方概括问题，主体区域放置一张清晰的大图。}
+  \PCLLead{上方概括问题，主体区域放置一张清晰的大图。}
   \PCLPlaceholder[38mm]{主图占位\\[2mm]\small 可放入 PDF 矢量图、曲线或系统照片}
   \PCLSource{图注或来源放在此处。此页仅展示版式。}
-  \PCLTakeaway{一句话概括本页结论，字号保持与正文一致。}
+  \vfill
+  \PCLTakeaway{用一句蓝色粗体文字概括本页结论。}
 \end{frame}
 
 \begin{frame}{图文双栏}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.39\textwidth}
-      \begin{PCLPanel}{文字说明}
-        \begin{itemize}
-          \item 第一项核心内容
-          \item 第二项方法说明
-          \item 第三项结果解释
-        \end{itemize}
-      \end{PCLPanel}
+      \PCLHeading{文字说明}
+      \begin{itemize}
+        \item 第一项核心内容
+        \item 第二项方法说明
+        \item 第三项结果解释
+      \end{itemize}
       \PCLSource{说明文字与右侧图形保持对应。}
     \end{column}
     \begin{column}{0.58\textwidth}
@@ -47,16 +47,14 @@
 \begin{frame}{两组结果对比}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.485\textwidth}
-      \begin{PCLPanel}{条件 A}
-        \PCLPlaceholder[32mm]{左图占位}
-        \small 图注：简要说明左图。
-      \end{PCLPanel}
+      \PCLHeading{条件 A}
+      \PCLPlaceholder[32mm]{左图占位}
+      \PCLFigureCaption{图注：简要说明左图。}
     \end{column}
     \begin{column}{0.485\textwidth}
-      \begin{PCLPanel}{条件 B}
-        \PCLPlaceholder[32mm]{右图占位}
-        \small 图注：简要说明右图。
-      \end{PCLPanel}
+      \PCLHeading{条件 B}
+      \PCLPlaceholder[32mm]{右图占位}
+      \PCLFigureCaption{图注：简要说明右图。}
     \end{column}
   \end{columns}
   \vfill
@@ -87,25 +85,26 @@
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.315\textwidth}
       \begin{PCLPanel}[height=43mm]{第一项}
-        \textbf{核心观点}\par\medskip
-        用两到三行文字说明这一项内容及其意义。
+        用两到三行文字说明问题、条件及其意义。
+        \par\medskip
+        普通分组标题通过位置和留白区分。
       \end{PCLPanel}
     \end{column}
     \begin{column}{0.315\textwidth}
       \begin{PCLPanel}[height=43mm]{第二项}
-        \textbf{核心观点}\par\medskip
-        可以替换为一个简洁的示意图或关键数值。
+        可以放入一个简洁的示意图或关键数值。
+        \par\medskip
+        三列共享对齐位置与文字样式。
       \end{PCLPanel}
     \end{column}
     \begin{column}{0.315\textwidth}
       \begin{PCLPanel}[height=43mm]{第三项}
-        \textbf{核心观点}\par\medskip
-        三列的文字层级与视觉重量保持一致。
+        \alert{关键判断}使用蓝色粗体，其余说明保持黑色常规字重。
+        \par\medskip
+        颜色只用于需要优先关注的信息。
       \end{PCLPanel}
     \end{column}
   \end{columns}
-  \vfill
-  \PCLTakeaway{用一句话归纳三项内容之间的联系。}
 \end{frame}
 
 \begin{frame}{参数与比较表}
@@ -114,7 +113,7 @@
     \renewcommand{\arraystretch}{1.6}
     \begin{tabular}{p{36mm}p{43mm}p{43mm}}
       \toprule
-      \textbf{项目} & \textbf{配置 A} & \textbf{配置 B} \\
+      项目 & 配置 A & 配置 B \\
       \midrule
       参数名称一 & 待填写 & 待填写 \\
       参数名称二 & 待填写 & 待填写 \\
@@ -185,10 +184,10 @@
   \vspace{5mm}
   \centering
   \begin{tikzpicture}[
-      module/.style={draw=PCLLine,fill=PCLLight,rounded corners=1mm,
+      module/.style={draw=PCLLine,fill=PCLLight,
         minimum width=30mm,minimum height=12mm,align=center,font=\normalsize},
       flow/.style={-{Latex[length=2mm]},PCLBlue,line width=0.8pt},
-      note/.style={font=\small,text=PCLGray,align=center}]
+      note/.style={font=\small,text=PCLInk,align=center}]
     \node[module] (tx) at (0,0) {信号生成};
     \node[module] (channel) at (3.8,0) {传输与采集};
     \node[module] (rx) at (7.6,0) {同步与处理};

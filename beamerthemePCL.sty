@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemePCL}[2026/10/21 v2.1 PCL presentation theme]
+\ProvidesPackage{beamerthemePCL}[2026/10/22 v2.2 PCL presentation theme]
 \RequirePackage{iftex}
 \ifXeTeX\else
   \PackageError{beamerthemePCL}{Compile with XeLaTeX}{This theme uses Chinese system fonts.}
@@ -34,7 +34,7 @@
 \definecolor{PCLLight}{HTML}{EDF7FC}
 \definecolor{PCLLine}{HTML}{BCDCEB}
 \definecolor{PCLGray}{HTML}{60666C}
-\definecolor{PCLInk}{HTML}{242424}
+\definecolor{PCLInk}{HTML}{000000}
 \definecolor{PCLBaseline}{HTML}{68737D}
 \definecolor{PCLReference}{HTML}{B56B13}
 
@@ -71,41 +71,47 @@
   \setbeamersize{text margin left=\PCLMargin,text margin right=\PCLMargin}}
 
 \setbeamercolor{normal text}{fg=PCLInk,bg=white}
-\setbeamercolor{structure}{fg=PCLBlue}
-\setbeamercolor{alerted text}{fg=PCLRed}
+\setbeamercolor{structure}{fg=PCLInk}
+\setbeamercolor{alerted text}{fg=PCLBlue}
 \setbeamercolor{frametitle}{fg=PCLTitleRed,bg=white}
 \setbeamercolor{title}{fg=PCLBlue}
 \setbeamercolor{section in toc}{fg=PCLRed}
 \setbeamercolor{section in toc shaded}{fg=PCLBlue}
-\setbeamercolor{block title}{fg=white,bg=PCLBlue}
-\setbeamercolor{block body}{fg=PCLInk,bg=PCLLight}
-\setbeamercolor{block title alerted}{fg=white,bg=PCLTitleRed}
-\setbeamercolor{block body alerted}{fg=PCLInk,bg=PCLRed!4}
+\setbeamercolor{block title}{fg=PCLInk,bg=white}
+\setbeamercolor{block body}{fg=PCLInk,bg=white}
+\setbeamercolor{block title alerted}{fg=PCLBlue,bg=white}
+\setbeamercolor{block body alerted}{fg=PCLInk,bg=white}
+\setbeamercolor{block title example}{fg=PCLInk,bg=white}
+\setbeamercolor{block body example}{fg=PCLInk,bg=white}
+\setbeamerfont{alerted text}{series=\bfseries}
 \setbeamerfont{normal text}{size=\fontsize{11}{15}\selectfont}
 \setbeamerfont{frametitle}{size=\fontsize{16}{19}\selectfont,series=\bfseries}
 \setbeamerfont{framesubtitle}{size=\fontsize{10}{13}\selectfont,series=\mdseries}
-\setbeamercolor{framesubtitle}{fg=PCLGray}
+\setbeamercolor{framesubtitle}{fg=PCLInk}
 \setbeamerfont{title}{size=\fontsize{17}{23}\selectfont,series=\bfseries}
 \setbeamerfont{section in toc}{size=\fontsize{15.175}{20}\selectfont,series=\bfseries}
-\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\mdseries}
+\setbeamerfont{block title alerted}{series=\bfseries}
+\setbeamerfont{block title example}{series=\mdseries}
 \setbeamerfont{block body}{size=\normalsize}
 \PCLSetup{}
 \beamer@centeredfalse
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
 \setbeamertemplate{items}[square]
-\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{blocks}[default]
 \setbeamertemplate{caption}[numbered]
 \setbeamerfont{caption}{size=\scriptsize}
-\setbeamercolor{caption name}{fg=PCLBlue}
+\setbeamercolor{caption name}{fg=PCLInk}
+\setbeamercolor{caption}{fg=PCLInk}
 \AtBeginDocument{\usebeamerfont{normal text}}
 \addtobeamertemplate{itemize/enumerate body begin}{\setlength{\itemsep}{1.5mm}}{}
 
 \newcommand{\PCLAssetPath}{assets/}
 \newcommand{\PCLSetAssetPath}[1]{\renewcommand{\PCLAssetPath}{#1}}
-\newcommand{\PCLSource}[1]{\par\vspace{1mm}{\fontsize{8}{10}\selectfont\color{PCLGray}#1\par}}
-\newcommand{\PCLFigureCaption}[1]{\par\vspace{1mm}{\fontsize{10}{13}\selectfont\color{PCLInk}#1\par}}
-\newcommand{\PCLHeading}[1]{\par{\color{PCLBlue}\bfseries #1\par}\vspace{1.5mm}}
+\newcommand{\PCLSource}[1]{\par\vspace{1mm}{\fontsize{8}{10}\selectfont\mdseries\upshape\color{PCLInk}#1\par}}
+\newcommand{\PCLFigureCaption}[1]{\par\vspace{1mm}{\fontsize{10}{13}\selectfont\mdseries\upshape\color{PCLInk}#1\par}}
+\newcommand{\PCLHeading}[1]{\par{\color{PCLInk}\mdseries\upshape #1\par}\vspace{1.5mm}}
 \newcommand{\PCLTitleColor}[1]{\setbeamercolor{frametitle}{fg=#1}}
 \newcommand{\PCLPageNumber}{\insertframenumber}
 \newcommand{\PCLCurrentYearMonth}{\number\year 年\number\month 月}
@@ -142,7 +148,7 @@
   }}\vskip\PCLTitleGap
 }
 \setbeamertemplate{footline}{%
-  \hbox to\paperwidth{\hfill{\fontsize{7}{9}\selectfont\color{PCLGray}\PCLPageNumber}\hspace*{4mm}}
+  \hbox to\paperwidth{\hfill{\fontsize{7}{9}\selectfont\color{PCLInk}\PCLPageNumber}\hspace*{4mm}}
   \vspace*{2mm}
 }
 
@@ -350,25 +356,25 @@
 \newcommand{\PCLSectionFramesOff}{\AtBeginSection[]{}}
 
 % Reusable content components. Ordinary beamer frames/columns remain supported.
+\tcbset{pcl bordered/.style={frame style={},boxrule=0.4pt,left=2.2mm,right=2.2mm,
+  top=2mm,bottom=2mm,toptitle=2mm}}
 \newtcolorbox{PCLPanel}[2][]{%
-  enhanced,colback=white,colframe=PCLLine,colbacktitle=PCLBlue,
-  coltitle=white,fonttitle=\bfseries,title={#2},boxrule=0.4pt,
-  arc=1mm,left=2.2mm,right=2.2mm,top=2mm,bottom=2mm,
+  enhanced,frame hidden,colback=white,colframe=PCLLine,colbacktitle=white,
+  coltitle=PCLInk,coltext=PCLInk,fonttitle=\mdseries\upshape,
+  fontupper=\mdseries\upshape,title={#2},boxrule=0pt,titlerule=0pt,
+  arc=0pt,boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt,
+  toptitle=0pt,bottomtitle=1.5mm,
   before skip=1mm,after skip=1mm,#1}
-\newcommand{\PCLLead}[2][要点]{%
-  \begin{tcolorbox}[enhanced,colback=PCLLight,colframe=PCLLine,boxrule=0.35pt,
-    arc=0.8mm,left=2mm,right=2mm,top=1.4mm,bottom=1.4mm,before skip=0mm,after skip=2mm]
-    {\color{PCLBlue}\bfseries #1}\quad #2
-  \end{tcolorbox}}
+\newcommand{\PCLLead}[2][]{%
+  \par{\raggedright\color{PCLInk}\mdseries\upshape
+    \if\relax\detokenize{#1}\relax\else #1\quad\fi
+    #2\par}\vspace{2mm}}
 \newcommand{\PCLTakeaway}[1]{%
-  \begin{tcolorbox}[colback=PCLBlue,colframe=PCLBlue,coltext=white,
-    boxrule=0pt,arc=0.7mm,left=2mm,right=2mm,top=1.3mm,bottom=1.3mm,
-    before skip=2mm,after skip=0mm,fontupper=\bfseries\normalsize]
-    #1
-  \end{tcolorbox}}
+  \par\vspace{2mm}{\raggedright\color{PCLBlue}\bfseries\upshape\normalsize #1\par}}
 \newcommand{\PCLPlaceholder}[2][36mm]{%
-  \begin{tcolorbox}[height=#1,valign=center,halign=center,colback=PCLLight!50,
-    colframe=PCLLine,boxrule=0.5pt,arc=1mm,coltext=PCLGray,
+  \begin{tcolorbox}[height=#1,valign=center,halign=center,colback=white,
+    colframe=PCLLine,boxrule=0.35pt,arc=0pt,coltext=PCLInk,
+    fontupper=\mdseries\upshape,
     before skip=0mm,after skip=0mm]
     #2
   \end{tcolorbox}}
